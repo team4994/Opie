@@ -22,6 +22,9 @@ import edu.wpi.first.wpilibj.motorcontrol.PWMSparkMax;
  * project.
  */
 public class Robot extends TimedRobot {
+  //compressor test
+
+  
   //motors,left
   private final PWMSparkMax m_LeftDriveL = new PWMSparkMax(0);
   private final PWMSparkMax m_LeftDriveF = new PWMSparkMax(1);
@@ -60,13 +63,14 @@ public class Robot extends TimedRobot {
   private final Timer m_timer = new Timer();
   
   //Pneumatic ports
-    private final Compressor m_compressor = new Compressor(PneumaticsModuleType.REVPH);
+    private final Compressor m_compressor = new Compressor(PneumaticsModuleType.CTREPCM);
   //followers of right/left/in-out
   public Robot() {
+
     m_LeftDriveL.addFollower(m_LeftDriveF);
     m_RightDriveL.addFollower(m_RightDriveF);
     m_MotorOutL.addFollower(m_MotorInF);
-  
+   
     //IDK what SendableRegistry does at this time
       SendableRegistry.addChild(m_robotDrive, m_LeftDriveL);
       SendableRegistry.addChild(m_robotDrive, m_RightDriveL);
@@ -83,6 +87,7 @@ public class Robot extends TimedRobot {
     m_encoder = new Encoder(kEncoderPortA, kEncoderPortB);
     m_encoder.setDistancePerPulse((Math.PI * 6) / 360.0);
     m_RightDriveL.setInverted(true);
+    m_compressor.enableDigital();
   }
   
   public void Compressor(int module, PneumaticsModuleType moduleType){
